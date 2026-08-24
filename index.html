@@ -18,46 +18,42 @@ body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif;padding-bottom:80
 .tab.active{background:#1877F2;color:#fff;border-color:#1877F2}
 .post-box{background:#fff;margin:12px;border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center}
 .post-box input{flex:1;border:none;background:#f0f2f5;padding:10px 14px;border-radius:20px;outline:none}
-.post-box button{background:#1877F2;color:#fff;border:none;padding:8px 18px;border-radius:20px;font-weight:700;cursor:pointer}
+.post-box button{background:#1877F2;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer}
 .actions{display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #eee;margin-top:10px}
 .actions span{cursor:pointer;padding:6px 12px;border-radius:6px;font-size:14px}
-.actions span:hover{background:#f0f2f5}
 .bottom-nav{background:#fff;border-radius:20px;margin:15px;padding:10px;display:flex;justify-content:space-around;position:fixed;bottom:10px;left:10px;right:10px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .waitlist{background:#fff;margin:15px;border-radius:12px;padding:16px}
 .waitlist input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 .waitlist button{width:100%;background:#1877F2;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:700}
-/* FACEBOOK STYLE SHARE MODAL */
 #shareModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:999;align-items:flex-end}
 #shareModal.show{display:flex}
 .sheet{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:16px;animation:up.3s}
 @keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.sheet.handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 12px}
+.handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 12px}
 .share-row{display:flex;gap:12px;overflow-x:auto;padding:8px 0}
-.share-opt{text-align:center;min-width:70px}
-.share-opt div{width:56px;height:56px;border-radius:50%;background:#f0f2f5;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 6px}
+.share-opt{text-align:center;min-width:70px;cursor:pointer}
+.share-opt div{width:56px;height:56px;border-radius:50%;background:#f0f2f5;display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 6px}
 .share-opt.whatsapp div{background:#25D366;color:#fff}
-.share-opt.status div{background:#25D366;color:#fff}
-.share-opt b{font-size:12px;display:block}
-.post-preview{background:#f0f2f5;border-radius:12px;padding:12px;margin:12px 0;display:flex;gap:10px}
-.post-preview img{width:40px;height:40px;border-radius:50%}
+.share-opt b{font-size:11px;display:block}
 </style>
 </head>
 <body>
-<div class="header"><img src="logo.png" alt="BF LOGO"><div class="logo">bookface</div><div style="margin-left:auto;font-size:11px;opacity:.9">Kelvin Onoja</div></div>
+<div class="header"><img src="logo.png" alt="BF"><div class="logo">bookface</div><div style="margin-left:auto;font-size:11px">Kelvin Onoja</div></div>
 <div class="tabs"><span class="tab active" id="t1" onclick="showTab('foryou')">For You</span><span class="tab" id="t2" onclick="showTab('following')">Following</span><span class="tab" id="t3" onclick="showTab('groups')">Groups</span></div>
-<div class="post-box"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><input id="postInput" placeholder="What's on your mind, Kelvin?"><button onclick="addPost()">Post</button></div>
+<div class="post-box"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><input id="postInput" placeholder="What's on your mind, Kelvin?"><input type="file" id="imgInput" accept="image/*" style="display:none" onchange="previewImg()"><button onclick="document.getElementById('imgInput').click()" style="background:#e4e6eb;color:#333">📷</button><button onclick="addPost()">Post</button></div>
+<div id="imgPreview" style="margin:0 12px;display:none"><img id="prev" style="width:100%;height:200px;object-fit:cover;border-radius:8px"><button onclick="clearImg()" style="background:red;color:#fff;border:none;padding:4px 8px;border-radius:6px;margin-top:4px">X Remove</button></div>
 <div id="feed"></div>
 
-<div id="shareModal" onclick="closeShare(event)">
+<div id="shareModal" onclick="if(event.target.id=='shareModal') this.classList.remove('show')">
   <div class="sheet">
     <div class="handle"></div>
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>Kelvin Onoja</b><div style="display:flex;gap:8px;margin-top:4px"><span style="background:#e4e6eb;padding:4px 8px;border-radius:6px;font-size:12px">▼ Feed</span><span style="background:#e4e6eb;padding:4px 8px;border-radius:6px;font-size:12px">🌍 Public</span></div></div></div>
-    <div id="shareText" style="padding:10px 0">Say something...</div>
+    <div style="display:flex;gap:10px;align-items:center"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>Kelvin Onoja</b><div style="display:flex;gap:6px;margin-top:4px"><span style="background:#e4e6eb;padding:3px 8px;border-radius:6px;font-size:11px">▼ Feed</span><span style="background:#e4e6eb;padding:3px 8px;border-radius:6px;font-size:11px">🌍 Public</span></div></div></div>
+    <div id="shareText" style="padding:12px 0;font-size:14px;color:#333">Say something...</div>
     <div style="text-align:right"><button onclick="doShareNow()" style="background:#1877F2;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:700">Share now</button></div>
     <div class="share-row">
       <div class="share-opt" onclick="shareTo('story')"><div>➕</div><b>Your story</b></div>
-      <div class="share-opt whatsapp" onclick="shareTo('whatsapp')"><div>🟢</div><b>WhatsApp</b></div>
-      <div class="share-opt status" onclick="shareTo('status')"><div>◎</div><b>WhatsApp Status</b></div>
+      <div class="share-opt whatsapp" onclick="shareTo('whatsapp')"><div style="font-size:28px">W</div><b>WhatsApp</b></div>
+      <div class="share-opt whatsapp" onclick="shareTo('status')"><div>◎</div><b>WhatsApp Status</b></div>
       <div class="share-opt" onclick="shareTo('group')"><div>👥</div><b>Group</b></div>
       <div class="share-opt" onclick="shareTo('copy')"><div>🔗</div><b>Copy link</b></div>
     </div>
@@ -66,6 +62,7 @@ body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif;padding-bottom:80
 
 <div class="waitlist"><h3>Join Waitlist</h3><p style="font-size:13px;color:#555;margin:6px 0">Be first to get BookFace app</p><form action="https://formsubmit.co/bookfacedating@gmail.com" method="POST"><input type="hidden" name="_next" value="https://niyyahbook101.github.io/bookface/thankyou.html"><input type="hidden" name="_captcha" value="false"><input name="name" placeholder="Your Name" required><input name="email" type="email" placeholder="Your Email" required><button type="submit">Join Waitlist</button></form></div>
 <div class="bottom-nav"><span>🏠 Home</span><span>🔍 Search</span><span>➕ Post</span><span>💬 Chat</span><span>👤 You</span></div>
+
 <script>
 let posts = JSON.parse(localStorage.getItem('bf_posts') || '[]');
 let defaults = [
@@ -74,63 +71,31 @@ let defaults = [
 ];
 if(posts.length==0) posts=defaults;
 let currentShareIndex=0;
+let selectedImg='';
+function previewImg(){let f=document.getElementById('imgInput').files[0]; if(!f) return; let r=new FileReader(); r.onload=e=>{selectedImg=e.target.result; document.getElementById('prev').src=selectedImg; document.getElementById('imgPreview').style.display='block';}; r.readAsDataURL(f);}
+function clearImg(){selectedImg=''; document.getElementById('imgPreview').style.display='none'; document.getElementById('imgInput').value='';}
 function render(){
   let h='';
   posts.forEach((p,i)=>{
-    let commentsHtml = '';
-    if(p.comments && p.comments.length){
-      p.comments.forEach(cm=>{
-        commentsHtml+=`<div style="background:#f0f2f5;border-radius:12px;padding:8px 10px;margin:6px 0 0 0;font-size:13px"><b>${cm.name}:</b> ${cm.text}</div>`;
-      });
-    }
+    let commentsHtml=''; if(p.comments){p.comments.forEach(cm=>{commentsHtml+=`<div style="background:#f0f2f5;border-radius:12px;padding:8px 10px;margin:6px 0 0 0;font-size:13px"><b>${cm.name}:</b> ${cm.text}</div>`;});}
     h+=`<div class="card"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>${p.name}</b><div style="font-size:11px;color:#777">${p.time}</div></div></div><p style="margin-bottom:10px">${p.text}</p>${p.img?`<img class="real" src="${p.img}">`:''}${commentsHtml}<div class="actions"><span onclick="like(${i})">👍 Like (${p.likes})</span><span onclick="comment(${i})">💬 Comment (${p.comments?p.comments.length:0})</span><span onclick="openShare(${i})">↗️ Share</span></div></div>`;
   });
-  document.getElementById('feed').innerHTML=h;
-  localStorage.setItem('bf_posts',JSON.stringify(posts));
+  document.getElementById('feed').innerHTML=h; localStorage.setItem('bf_posts',JSON.stringify(posts));
 }
-function addPost(){
-  let t=document.getElementById('postInput').value.trim();
-  if(!t) return;
-  posts.unshift({name:'Kelvin Onoja', time:'Just now', text:t, img:'', likes:0, comments:[]});
-  document.getElementById('postInput').value='';
-  render();
-}
+function addPost(){let t=document.getElementById('postInput').value.trim(); if(!t &&!selectedImg) return; posts.unshift({name:'Kelvin Onoja', time:'Just now', text:t||'📷 Photo', img:selectedImg, likes:0, comments:[]}); document.getElementById('postInput').value=''; clearImg(); render();}
 function like(i){posts[i].likes++; render();}
-function comment(i){
-  let c=prompt('Write a comment:');
-  if(!c) return;
-  if(!posts[i].comments) posts[i].comments=[];
-  posts[i].comments.push({name:'Kelvin Onoja', text:c});
-  render();
-}
-function openShare(i){
-  currentShareIndex=i;
-  document.getElementById('shareText').innerText=posts[i].text;
-  document.getElementById('shareModal').classList.add('show');
-}
-function closeShare(e){
-  if(e.target.id=='shareModal') document.getElementById('shareModal').classList.remove('show');
-}
-function doShareNow(){
-  posts.unshift({name:'Kelvin Onoja', time:'Just now', text:'Shared: '+posts[currentShareIndex].text, img:posts[currentShareIndex].img||'', likes:0, comments:[]});
-  document.getElementById('shareModal').classList.remove('show');
-  render();
-  alert('Shared to your BookFace feed!');
-}
+function comment(i){let c=prompt('Write a comment:'); if(!c) return; if(!posts[i].comments) posts[i].comments=[]; posts[i].comments.push({name:'Kelvin Onoja', text:c}); render();}
+function openShare(i){currentShareIndex=i; document.getElementById('shareText').innerText=posts[i].text; document.getElementById('shareModal').classList.add('show');}
+function doShareNow(){posts.unshift({name:'Kelvin Onoja', time:'Just now', text:'Shared: '+posts[currentShareIndex].text, img:posts[currentShareIndex].img||'', likes:0, comments:[]}); document.getElementById('shareModal').classList.remove('show'); render();}
 function shareTo(type){
-  let text=posts[currentShareIndex].text;
-  let url=location.href;
-  if(type=='whatsapp') window.open('https://wa.me/?text='+encodeURIComponent(text+' - '+url));
-  else if(type=='status') window.open('https://wa.me/?text='+encodeURIComponent(text));
-  else if(type=='copy'){ navigator.clipboard.writeText(url); alert('Link copied!'); }
-  else alert(type+' sharing coming soon!');
+  let text=posts[currentShareIndex].text; let url=location.href;
+  if(type=='whatsapp') window.open('https://wa.me/?text='+encodeURIComponent(text+' '+url),'_blank');
+  else if(type=='status'){ if(navigator.share){navigator.share({text:text, url:url});} else {window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');}}
+  else if(type=='story'){posts.unshift({name:'Kelvin Onoja', time:'Just now', text:'Story: '+text, img:posts[currentShareIndex].img||'', likes:0, comments:[]}); document.getElementById('shareModal').classList.remove('show'); render(); alert('Added to your BookFace story!');}
+  else if(type=='group'){let g=prompt('Which group?'); if(g){alert('Shared to group: '+g); doShareNow();}}
+  else if(type=='copy'){navigator.clipboard.writeText(url+'\n'+text); alert('Link copied!');}
 }
-function showTab(t){
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
-  if(t=='foryou') document.getElementById('t1').classList.add('active');
-  if(t=='following') document.getElementById('t2').classList.add('active');
-  if(t=='groups') document.getElementById('t3').classList.add('active');
-}
+function showTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); if(t=='foryou') document.getElementById('t1').classList.add('active'); if(t=='following') document.getElementById('t2').classList.add('active'); if(t=='groups') document.getElementById('t3').classList.add('active');}
 render();
 </script>
 </body>
