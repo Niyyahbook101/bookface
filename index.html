@@ -1,69 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>niyyahBook - Dating with Intention</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NiyyahBook - Halal Dating</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#FFFBF0;color:#1a1a1a}
-.hero{
-  background: linear-gradient(rgba(15,81,50,0.85), rgba(15,81,50,0.75)), 
-  url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200');
-  background-size:cover;background-position:center;
-  color:#fff;text-align:center;padding:80px 20px 90px}
-.hero h1{font-size:52px;font-weight:800;text-shadow:0 2px 10px rgba(0,0,0,.3)}
-.card{background:#fff;max-width:800px;margin:-40px auto 30px;border-radius:20px;padding:30px 20px;box-shadow:0 20px 40px rgba(0,0,0,.08);text-align:center}
-.features{display:grid;gap:15px;max-width:900px;margin:30px auto;padding:0 20px}@media(min-width:700px){.features{grid-template-columns:repeat(3,1fr)}}
-.feat{background:#fff;border-radius:16px;padding:22px;box-shadow:0 8px 20px rgba(0,0,0,.05);text-align:center;border:1px solid #f0e6d3}
-.sneak{max-width:420px;margin:50px auto;background:#FFFBF0;border-radius:30px;padding:20px;border:4px solid #0f5132;box-shadow:0 20px 50px rgba(0,0,0,.15)}
-.tab{cursor:pointer;padding:6px 10px;border-radius:10px}.tab.active{color:#0f5132;border-bottom:3px solid #0f5132;font-weight:800}
-.like{cursor:pointer;user-select:none}.like.liked{color:#0f5132;font-weight:800}
-.waitlist{max-width:600px;margin:50px auto;background:#fff;border-radius:20px;padding:35px 20px;box-shadow:0 15px 35px rgba(0,0,0,.08);text-align:center;border:2px solid #0f5132}
-input[type=email]{width:90%;max-width:380px;padding:14px 20px;border-radius:30px;border:2px solid #d1c7b0;font-size:16px}
-button.main{background:#0f5132;color:#fff;border:none;padding:14px 36px;border-radius:30px;font-size:16px;font-weight:700;margin-top:15px;cursor:pointer}
-footer{text-align:center;padding:30px;color:#888;font-size:12px}
+body{margin:0;background:#fef9e8;font-family:Arial,sans-serif;color:#222}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:#fff;border-bottom:2px solid #0f5132}
+.logo{font-size:32px;font-weight:800;color:#0f5132}
+.tabs{display:flex;justify-content:space-around;background:#fff;border-radius:20px;margin:15px;padding:8px}
+.tab{padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:600}
+.tab.active{background:#0f5132;color:#fff}
+.card{background:#fff;border-radius:16px;padding:15px;margin:15px 0;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.bottom-nav{background:#0f5132;color:#fff;border-radius:20px;padding:12px;display:flex;justify-content:space-around;margin:15px;position:sticky;bottom:15px}
+.bottom-nav span{cursor:pointer}
+.waitlist-section{text-align:center;padding:40px 20px;background:#fff;margin:20px;border-radius:20px;border:2px solid #0f5132}
 </style>
 </head>
 <body>
-<div class="hero"><h1>niyyahBook</h1><p style="font-size:18px;margin-top:10px;font-weight:600">Dating with Intention. For people serious about real relationships — not endless swiping.</p><p style="margin-top:15px">✨ Trusted by African & European singles seeking real love</p></div>
-<div class="card"><h2>Built on Trust & Real Intentions</h2><p>✓ Verified ✓ Private ✓ Values-Based</p></div>
-<div style="text-align:center;margin-top:40px"><h2>Sneak Peek: Inside the App</h2><p style="color:#666">Tap around — it's live!</p></div>
-<div class="sneak">
-<div style="display:flex;justify-content:space-between"><b style="font-size:32px;color:#0f5132">Niyyah</b><div><button onclick="coming()" style="background:#0f5132;color:#fff;border:none;padding:8px 14px;border-radius:20px;margin:2px">📞</button><button onclick="coming()" style="background:#0f5132;color:#fff;border:none;padding:8px 14px;border-radius:20px;margin:2px">📹</button></div></div>
-<div style="margin:15px 0"><button onclick="coming()" style="background:#0f5132;color:#fff;border:none;padding:8px 14px;border-radius:20px;margin:5px">💬 Group Chat</button><button onclick="coming()" style="background:#fff;color:#0f5132;border:2px solid #0f5132;padding:8px 14px;border-radius:20px;margin:5px">+ Create Group</button></div>
-<div style="display:flex;justify-content:space-around;background:#fff;border-radius:20px;padding:10px;margin:15px 0;font-weight:600">
-<span id="t1" class="tab active" onclick="showTab('foryou')">For You</span>
-<span id="t2" class="tab" onclick="showTab('following')">Following</span>
-<span id="t3" class="tab" onclick="showTab('groups')">Groups</span>
+
+<div class="header">
+<b style="font-size:32px;color:#0f5132">Niyyah</b>
+<div style="display:flex;gap:8px">
+<button onclick="coming()" style="background:#0f5132;color:#fff;border:none;border-radius:20px;padding:8px 12px">📞</button>
+<button onclick="coming()" style="background:#0f5132;color:#fff;border:none;border-radius:20px;padding:8px 12px">📁</button>
 </div>
+</div>
+
+<div style="padding:0 15px">
+<div class="tabs">
+<span class="tab active" id="t1" onclick="showTab('foryou')">For You</span>
+<span class="tab" id="t2" onclick="showTab('following')">Following</span>
+<span class="tab" id="t3" onclick="showTab('groups')">Groups</span>
+</div>
+
 <div id="foryou">
-<div style="background:#fff;border-radius:16px;padding:15px;margin:15px 0;text-align:left">
+<div class="card">
 <b>Amira • 24 • London</b> <span style="font-size:11px;color:#888">2h ago</span>
 <p style="font-size:13px;margin:8px 0">Slow mornings, deep talks, and genuine connections. Loving this community 💚 Walk in Hyde Park? #NewHere</p>
 <div style="background:#e8e8e8;height:100px;border-radius:10px;display:flex;align-items:center;justify-content:center">📸 Photo</div>
-<p><span class="like" onclick="like(this)"><b>💚 <span>124</span></b></span> &nbsp; 💬 18 &nbsp; ↗️ Share 6</p>
+<div style="margin-top:8px"><b onclick="like(this)" style="cursor:pointer">💚 <span>124</span></b> &nbsp; 💬 18 &nbsp; ↗️ Share 6</div>
 </div>
-<div style="background:#fff;border-radius:16px;padding:15px;margin:15px 0;text-align:left">
+
+<div class="card">
 <b>Omar • 27 • Manchester</b> <span style="font-size:11px;color:#888">5h ago</span>
 <p style="font-size:13px;margin:8px 0">Grateful for this space. It's refreshing to meet people who value faith, kindness, and real conversation.</p>
-<p><span class="like" onclick="like(this)"><b>🤍 <span>89</span></b></span> &nbsp; 💬 32 &nbsp; ↗️ Share 4</p>
+<div><b onclick="like(this)" style="cursor:pointer">🤍 <span>89</span></b> &nbsp; 💬 32 &nbsp; ↗️ Share 4</div>
 </div>
 </div>
-<div id="following" style="display:none"><div style="background:#fff;border-radius:16px;padding:20px">No one you follow has posted yet. Follow people from Explore →</div></div>
-<div id="groups" style="display:none"><div style="background:#fff;border-radius:16px;padding:20px">Groups: Coffee & Conversations (234), Mindful Connections (189), Weekend Walks (56)<br><br><button onclick="coming()" style="background:#0f5132;color:#fff;border:none;padding:8px 14px;border-radius:10px">Join Group</button></div></div>
-<div style="background:#0f5132;color:#fff;border-radius:20px;padding:12px;display:flex;justify-content:space-around;font-size:12px;margin-top:10px">
-<span onclick="coming()" style="cursor:pointer">🏠 Feed</span><span onclick="coming()" style="cursor:pointer">🧭 Explore</span><span onclick="coming()" style="cursor:pointer">🤍 Matches</span><span onclick="coming()" style="cursor:pointer">💬 Chat³</span><span onclick="coming()" style="cursor:pointer">👤 Profile</span>
+
+<div id="following" style="display:none"><div class="card">Following feed coming soon...</div></div>
+<div id="groups" style="display:none"><div class="card">Groups coming soon...</div></div>
+
+<div class="bottom-nav">
+<span onclick="coming()">🏠 Feed</span>
+<span onclick="coming()">🧭 Explore</span>
+<span onclick="coming()">🤍 Matches</span>
+<span onclick="coming()">💬 Chat³</span>
+<span onclick="coming()">👤 Profile</span>
 </div>
-</div>
-<div class="waitlist"><h2 style="font-weight:800;font-size:30px">Join Waitlist</h2>
+
+<div class="waitlist-section">
+<h2 style="font-weight:800;font-size:30px">Join Waitlist</h2>
 <form action="https://formsubmit.co/niyyahdating@gmail.com" method="POST">
 <input type="hidden" name="_captcha" value="false">
 <input type="hidden" name="_subject" value="New niyyahBook V5 Signup!">
-<input type="hidden" name="_next" value="https://niyyahbook101.github.io/niyyahbook-/thankyou.html"
-<input type="email" name="email" placeholder="Enter email" required><br>
-<button class="main" type="submit">Join Now - Free 3 Months</button>
-</form></div>
-<footer>© 2026 niyyahBook</footer>
+<input type="hidden" name="_next" value="https://niyyahbook101.github.io/niyyahbook-/thankyou.html">
+<input type="email" name="email" placeholder="Enter email" required style="padding:12px 18px;border-radius:25px;border:1.5px solid #0f5132;width:85%;max-width:320px;margin:10px 0;">
+<br>
+<button class="main" type="submit" style="background:#0f5132;color:#fff;border-radius:25px;padding:12px 28px;border:none;font-weight:700;cursor:pointer;">Join Now - Free 3 Months</button>
+</form>
+</div>
+
+</div>
+
+<footer style="text-align:center;padding:20px;color:#888;font-size:12px">© 2026 niyyahBook</footer>
+
 <script>
 function showTab(n){
 document.getElementById('foryou').style.display='none';
@@ -71,14 +83,12 @@ document.getElementById('following').style.display='none';
 document.getElementById('groups').style.display='none';
 document.getElementById(n).style.display='block';
 document.querySelectorAll('.tab').forEach(e=>e.classList.remove('active'));
-document.getElementById(n=='foryou'?'t1':n=='following'?'t2':'t3').classList.add('active');
+if(n=='foryou')document.getElementById('t1').classList.add('active');
+if(n=='following')document.getElementById('t2').classList.add('active');
+if(n=='groups')document.getElementById('t3').classList.add('active');
 }
-function like(el){
-let num=el.querySelector('span');let c=parseInt(num.innerText);
-if(el.classList.contains('liked')){num.innerText=c-1;el.classList.remove('liked');el.innerHTML='<b>🤍 <span>'+(c-1)+'</span></b>';}
-else{num.innerText=c+1;el.classList.add('liked');el.innerHTML='<b>💚 <span>'+(c+1)+'</span></b>';}
-}
-function coming(){alert('🚀 Full app launching soon! Join waitlist below to get early access.');}
+function like(e){let s=e.querySelector('span');s.innerText=parseInt(s.innerText)+1;e.style.color='#0f5132'}
+function coming(){alert('Coming Soon InshaAllah! 🚀')}
 </script>
 </body>
 </html>
