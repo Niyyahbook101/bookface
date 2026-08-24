@@ -22,11 +22,24 @@ body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif;padding-bottom:80
 .actions{display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #eee;margin-top:10px}
 .actions span{cursor:pointer;padding:6px 12px;border-radius:6px;font-size:14px}
 .actions span:hover{background:#f0f2f5}
-.actions span.liked{color:#1877F2;font-weight:700}
 .bottom-nav{background:#fff;border-radius:20px;margin:15px;padding:10px;display:flex;justify-content:space-around;position:fixed;bottom:10px;left:10px;right:10px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .waitlist{background:#fff;margin:15px;border-radius:12px;padding:16px}
 .waitlist input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 .waitlist button{width:100%;background:#1877F2;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:700}
+/* FACEBOOK STYLE SHARE MODAL */
+#shareModal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;z-index:999;align-items:flex-end}
+#shareModal.show{display:flex}
+.sheet{background:#fff;width:100%;border-radius:20px 20px 0 0;padding:16px;animation:up.3s}
+@keyframes up{from{transform:translateY(100%)}to{transform:translateY(0)}}
+.sheet.handle{width:40px;height:4px;background:#ddd;border-radius:2px;margin:0 auto 12px}
+.share-row{display:flex;gap:12px;overflow-x:auto;padding:8px 0}
+.share-opt{text-align:center;min-width:70px}
+.share-opt div{width:56px;height:56px;border-radius:50%;background:#f0f2f5;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 6px}
+.share-opt.whatsapp div{background:#25D366;color:#fff}
+.share-opt.status div{background:#25D366;color:#fff}
+.share-opt b{font-size:12px;display:block}
+.post-preview{background:#f0f2f5;border-radius:12px;padding:12px;margin:12px 0;display:flex;gap:10px}
+.post-preview img{width:40px;height:40px;border-radius:50%}
 </style>
 </head>
 <body>
@@ -34,6 +47,23 @@ body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif;padding-bottom:80
 <div class="tabs"><span class="tab active" id="t1" onclick="showTab('foryou')">For You</span><span class="tab" id="t2" onclick="showTab('following')">Following</span><span class="tab" id="t3" onclick="showTab('groups')">Groups</span></div>
 <div class="post-box"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><input id="postInput" placeholder="What's on your mind, Kelvin?"><button onclick="addPost()">Post</button></div>
 <div id="feed"></div>
+
+<div id="shareModal" onclick="closeShare(event)">
+  <div class="sheet">
+    <div class="handle"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>Kelvin Onoja</b><div style="display:flex;gap:8px;margin-top:4px"><span style="background:#e4e6eb;padding:4px 8px;border-radius:6px;font-size:12px">▼ Feed</span><span style="background:#e4e6eb;padding:4px 8px;border-radius:6px;font-size:12px">🌍 Public</span></div></div></div>
+    <div id="shareText" style="padding:10px 0">Say something...</div>
+    <div style="text-align:right"><button onclick="doShareNow()" style="background:#1877F2;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-weight:700">Share now</button></div>
+    <div class="share-row">
+      <div class="share-opt" onclick="shareTo('story')"><div>➕</div><b>Your story</b></div>
+      <div class="share-opt whatsapp" onclick="shareTo('whatsapp')"><div>🟢</div><b>WhatsApp</b></div>
+      <div class="share-opt status" onclick="shareTo('status')"><div>◎</div><b>WhatsApp Status</b></div>
+      <div class="share-opt" onclick="shareTo('group')"><div>👥</div><b>Group</b></div>
+      <div class="share-opt" onclick="shareTo('copy')"><div>🔗</div><b>Copy link</b></div>
+    </div>
+  </div>
+</div>
+
 <div class="waitlist"><h3>Join Waitlist</h3><p style="font-size:13px;color:#555;margin:6px 0">Be first to get BookFace app</p><form action="https://formsubmit.co/bookfacedating@gmail.com" method="POST"><input type="hidden" name="_next" value="https://niyyahbook101.github.io/bookface/thankyou.html"><input type="hidden" name="_captcha" value="false"><input name="name" placeholder="Your Name" required><input name="email" type="email" placeholder="Your Email" required><button type="submit">Join Waitlist</button></form></div>
 <div class="bottom-nav"><span>🏠 Home</span><span>🔍 Search</span><span>➕ Post</span><span>💬 Chat</span><span>👤 You</span></div>
 <script>
@@ -43,6 +73,7 @@ let defaults = [
 {name:'Omar Bello', time:'5h ago', text:'BookFace is the future! No filters, just real people. - Kelvin is building something special.', img:'https://picsum.photos/seed/omar/600/400', likes:89, comments:[]}
 ];
 if(posts.length==0) posts=defaults;
+let currentShareIndex=0;
 function render(){
   let h='';
   posts.forEach((p,i)=>{
@@ -52,7 +83,7 @@ function render(){
         commentsHtml+=`<div style="background:#f0f2f5;border-radius:12px;padding:8px 10px;margin:6px 0 0 0;font-size:13px"><b>${cm.name}:</b> ${cm.text}</div>`;
       });
     }
-    h+=`<div class="card"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>${p.name}</b><div style="font-size:11px;color:#777">${p.time}</div></div></div><p style="margin-bottom:10px">${p.text}</p>${p.img?`<img class="real" src="${p.img}">`:''}${commentsHtml}<div class="actions"><span id="like-${i}" onclick="like(${i})">👍 Like (${p.likes})</span><span onclick="comment(${i})">💬 Comment (${p.comments?p.comments.length:0})</span><span onclick="share(${i})">↗️ Share</span></div></div>`;
+    h+=`<div class="card"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>${p.name}</b><div style="font-size:11px;color:#777">${p.time}</div></div></div><p style="margin-bottom:10px">${p.text}</p>${p.img?`<img class="real" src="${p.img}">`:''}${commentsHtml}<div class="actions"><span onclick="like(${i})">👍 Like (${p.likes})</span><span onclick="comment(${i})">💬 Comment (${p.comments?p.comments.length:0})</span><span onclick="openShare(${i})">↗️ Share</span></div></div>`;
   });
   document.getElementById('feed').innerHTML=h;
   localStorage.setItem('bf_posts',JSON.stringify(posts));
@@ -72,7 +103,28 @@ function comment(i){
   posts[i].comments.push({name:'Kelvin Onoja', text:c});
   render();
 }
-function share(i){ navigator.clipboard.writeText(posts[i].text); alert('Post copied! You can share it now'); }
+function openShare(i){
+  currentShareIndex=i;
+  document.getElementById('shareText').innerText=posts[i].text;
+  document.getElementById('shareModal').classList.add('show');
+}
+function closeShare(e){
+  if(e.target.id=='shareModal') document.getElementById('shareModal').classList.remove('show');
+}
+function doShareNow(){
+  posts.unshift({name:'Kelvin Onoja', time:'Just now', text:'Shared: '+posts[currentShareIndex].text, img:posts[currentShareIndex].img||'', likes:0, comments:[]});
+  document.getElementById('shareModal').classList.remove('show');
+  render();
+  alert('Shared to your BookFace feed!');
+}
+function shareTo(type){
+  let text=posts[currentShareIndex].text;
+  let url=location.href;
+  if(type=='whatsapp') window.open('https://wa.me/?text='+encodeURIComponent(text+' - '+url));
+  else if(type=='status') window.open('https://wa.me/?text='+encodeURIComponent(text));
+  else if(type=='copy'){ navigator.clipboard.writeText(url); alert('Link copied!'); }
+  else alert(type+' sharing coming soon!');
+}
 function showTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   if(t=='foryou') document.getElementById('t1').classList.add('active');
