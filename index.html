@@ -7,7 +7,7 @@
 <title>BookFace - Real Faces, Real Connections</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif}
+body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif;padding-bottom:80px}
 .header{background:#1877F2;color:#fff;padding:10px 15px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:100}
 .header img{width:40px;height:40px;border-radius:8px;background:#fff}
 .logo{font-size:28px;font-weight:900;letter-spacing:-1px}
@@ -20,69 +20,39 @@ body{background:#e7f3ff;font-family:Arial,Helvetica,sans-serif}
 .post-box input{flex:1;border:none;background:#f0f2f5;padding:10px 14px;border-radius:20px;outline:none}
 .post-box button{background:#1877F2;color:#fff;border:none;padding:8px 18px;border-radius:20px;font-weight:700;cursor:pointer}
 .actions{display:flex;justify-content:space-around;padding:8px 0;border-top:1px solid #eee;margin-top:10px}
-.actions span{cursor:pointer;padding:6px 12px;border-radius:6px}
+.actions span{cursor:pointer;padding:6px 12px;border-radius:6px;font-size:14px}
 .actions span:hover{background:#f0f2f5}
 .actions span.liked{color:#1877F2;font-weight:700}
-.bottom-nav{background:#fff;border-radius:20px;margin:15px;padding:10px;display:flex;justify-content:space-around;position:sticky;bottom:10px}
+.bottom-nav{background:#fff;border-radius:20px;margin:15px;padding:10px;display:flex;justify-content:space-around;position:fixed;bottom:10px;left:10px;right:10px;box-shadow:0 4px 12px rgba(0,0,0,.15)}
 .waitlist{background:#fff;margin:15px;border-radius:12px;padding:16px}
 .waitlist input{width:100%;padding:12px;margin:8px 0;border:1px solid #ddd;border-radius:8px}
 .waitlist button{width:100%;background:#1877F2;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:700}
 </style>
 </head>
 <body>
-
-<div class="header">
-<img src="logo.png" alt="BF LOGO">
-<div class="logo">bookface</div>
-<div style="margin-left:auto;font-size:11px;opacity:.9">Kelvin Onoja</div>
-</div>
-
-<div class="tabs">
-<span class="tab active" id="t1" onclick="showTab('foryou')">For You</span>
-<span class="tab" id="t2" onclick="showTab('following')">Following</span>
-<span class="tab" id="t3" onclick="showTab('groups')">Groups</span>
-</div>
-
-<div class="post-box">
-<img src="logo.png" style="width:36px;height:36px;border-radius:50%">
-<input id="postInput" placeholder="What's on your mind, Kelvin?">
-<button onclick="addPost()">Post</button>
-</div>
-
+<div class="header"><img src="logo.png" alt="BF LOGO"><div class="logo">bookface</div><div style="margin-left:auto;font-size:11px;opacity:.9">Kelvin Onoja</div></div>
+<div class="tabs"><span class="tab active" id="t1" onclick="showTab('foryou')">For You</span><span class="tab" id="t2" onclick="showTab('following')">Following</span><span class="tab" id="t3" onclick="showTab('groups')">Groups</span></div>
+<div class="post-box"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><input id="postInput" placeholder="What's on your mind, Kelvin?"><button onclick="addPost()">Post</button></div>
 <div id="feed"></div>
-
-<div class="waitlist">
-<h3>Join Waitlist</h3>
-<p style="font-size:13px;color:#555;margin:6px 0">Be first to get BookFace app</p>
-<form action="https://formsubmit.co/bookfacedating@gmail.com" method="POST">
-<input type="hidden" name="_next" value="https://niyyahbook101.github.io/bookface/thankyou.html">
-<input type="hidden" name="_captcha" value="false">
-<input name="name" placeholder="Your Name" required>
-<input name="email" type="email" placeholder="Your Email" required>
-<button type="submit">Join Waitlist</button>
-</form>
-</div>
-
-<div class="bottom-nav">
-<span>🏠 Home</span>
-<span>🔍 Search</span>
-<span>➕ Post</span>
-<span>💬 Chat</span>
-<span>👤 You</span>
-</div>
-
+<div class="waitlist"><h3>Join Waitlist</h3><p style="font-size:13px;color:#555;margin:6px 0">Be first to get BookFace app</p><form action="https://formsubmit.co/bookfacedating@gmail.com" method="POST"><input type="hidden" name="_next" value="https://niyyahbook101.github.io/bookface/thankyou.html"><input type="hidden" name="_captcha" value="false"><input name="name" placeholder="Your Name" required><input name="email" type="email" placeholder="Your Email" required><button type="submit">Join Waitlist</button></form></div>
+<div class="bottom-nav"><span>🏠 Home</span><span>🔍 Search</span><span>➕ Post</span><span>💬 Chat</span><span>👤 You</span></div>
 <script>
 let posts = JSON.parse(localStorage.getItem('bf_posts') || '[]');
 let defaults = [
-{name:'Amira Johnson', time:'2h ago', text:'Just launched my new art studio in Lagos! 🎨 Real faces, real connections.', img:'https://picsum.photos/seed/amira/600/400', likes:124},
-{name:'Omar Bello', time:'5h ago', text:'BookFace is the future! No filters, just real people. - Kelvin is building something special.', img:'https://picsum.photos/seed/omar/600/400', likes:89}
+{name:'Amira Johnson', time:'2h ago', text:'Just launched my new art studio in Lagos! 🎨 Real faces, real connections.', img:'https://picsum.photos/seed/amira/600/400', likes:124, comments:[]},
+{name:'Omar Bello', time:'5h ago', text:'BookFace is the future! No filters, just real people. - Kelvin is building something special.', img:'https://picsum.photos/seed/omar/600/400', likes:89, comments:[]}
 ];
 if(posts.length==0) posts=defaults;
-
 function render(){
   let h='';
   posts.forEach((p,i)=>{
-    h+=`<div class="card"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>${p.name}</b><div style="font-size:11px;color:#777">${p.time}</div></div></div><p style="margin-bottom:10px">${p.text}</p>${p.img?`<img class="real" src="${p.img}">`:''}<div class="actions"><span id="like-${i}" onclick="like(${i})">👍 Like (${p.likes})</span><span onclick="comment(${i})">💬 Comment</span><span>↗️ Share</span></div></div>`;
+    let commentsHtml = '';
+    if(p.comments && p.comments.length){
+      p.comments.forEach(cm=>{
+        commentsHtml+=`<div style="background:#f0f2f5;border-radius:12px;padding:8px 10px;margin:6px 0 0 0;font-size:13px"><b>${cm.name}:</b> ${cm.text}</div>`;
+      });
+    }
+    h+=`<div class="card"><div style="display:flex;gap:10px;align-items:center;margin-bottom:10px"><img src="logo.png" style="width:36px;height:36px;border-radius:50%"><div><b>${p.name}</b><div style="font-size:11px;color:#777">${p.time}</div></div></div><p style="margin-bottom:10px">${p.text}</p>${p.img?`<img class="real" src="${p.img}">`:''}${commentsHtml}<div class="actions"><span id="like-${i}" onclick="like(${i})">👍 Like (${p.likes})</span><span onclick="comment(${i})">💬 Comment (${p.comments?p.comments.length:0})</span><span onclick="share(${i})">↗️ Share</span></div></div>`;
   });
   document.getElementById('feed').innerHTML=h;
   localStorage.setItem('bf_posts',JSON.stringify(posts));
@@ -90,19 +60,19 @@ function render(){
 function addPost(){
   let t=document.getElementById('postInput').value.trim();
   if(!t) return;
-  posts.unshift({name:'Kelvin Onoja', time:'Just now', text:t, img:'', likes:0});
+  posts.unshift({name:'Kelvin Onoja', time:'Just now', text:t, img:'', likes:0, comments:[]});
   document.getElementById('postInput').value='';
   render();
 }
-function like(i){
-  posts[i].likes++;
-  document.getElementById(`like-${i}`).classList.add('liked');
-  render();
-}
+function like(i){posts[i].likes++; render();}
 function comment(i){
   let c=prompt('Write a comment:');
-  if(c) alert('Comment posted: '+c);
+  if(!c) return;
+  if(!posts[i].comments) posts[i].comments=[];
+  posts[i].comments.push({name:'Kelvin Onoja', text:c});
+  render();
 }
+function share(i){ navigator.clipboard.writeText(posts[i].text); alert('Post copied! You can share it now'); }
 function showTab(t){
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   if(t=='foryou') document.getElementById('t1').classList.add('active');
