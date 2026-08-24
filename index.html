@@ -3,31 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NiyyahBook - Halal Dating</title>
+<title>BookFace - Real Faces, Real Connections</title>
+<meta name="description" content="BookFace - Owned by Kelvin Onomuaborigho - Real People, Real Books, Real Connections">
 <style>
-body{margin:0;background:#fef9e8;font-family:Arial,sans-serif;color:#222}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px 20px;background:#fff;border-bottom:2px solid #0f5132}
-.logo{font-size:32px;font-weight:800;color:#0f5132}
-.tabs{display:flex;justify-content:space-around;background:#fff;border-radius:20px;margin:15px;padding:8px}
-.tab{padding:8px 16px;border-radius:20px;cursor:pointer;font-weight:600}
-.tab.active{background:#0f5132;color:#fff}
-.card{background:#fff;border-radius:16px;padding:15px;margin:15px 0;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
-.bottom-nav{background:#0f5132;color:#fff;border-radius:20px;padding:12px;display:flex;justify-content:space-around;margin:15px;position:sticky;bottom:15px}
-.bottom-nav span{cursor:pointer}
-.waitlist-section{text-align:center;padding:40px 20px;background:#fff;margin:20px;border-radius:20px;border:2px solid #0f5132}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#e7f3ff;font-family:Arial, Helvetica, sans-serif;color:#050505}
+.header{background:#1877F2;color:#fff;padding:10px 15px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.header img{width:40px;height:40px;border-radius:8px;background:#fff;object-fit:contain}
+.logo{font-size:28px;font-weight:900;letter-spacing:-1px}
+.card{background:#fff;border-radius:10px;margin:12px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.card img.real{width:100%;height:280px;object-fit:cover;border-radius:8px;margin-top:10px;display:block}
+.tabs{display:flex;gap:10px;padding:10px 15px}
+.tab{background:#fff;padding:8px 14px;border-radius:20px;font-weight:700;font-size:14px;cursor:pointer;border:1px solid #ddd}
+.tab.active{background:#1877F2;color:#fff;border-color:#1877F2}
+.bottom-nav{background:#fff;border-radius:20px;margin:15px;padding:12px;display:flex;justify-content:space-around;box-shadow:0 2px 8px rgba(0,0,0,.15);position:sticky;bottom:15px}
+.waitlist{background:#fff;margin:15px;border-radius:12px;padding:20px;text-align:center;border:2px solid #1877F2}
 </style>
 </head>
 <body>
 
 <div class="header">
-<b style="font-size:32px;color:#0f5132">Niyyah</b>
-<div style="display:flex;gap:8px">
-<button onclick="coming()" style="background:#0f5132;color:#fff;border:none;border-radius:20px;padding:8px 12px">📞</button>
-<button onclick="coming()" style="background:#0f5132;color:#fff;border:none;border-radius:20px;padding:8px 12px">📁</button>
-</div>
+<img src="logo.png" alt="BF LOGO">
+<div class="logo">bookface</div>
+<div style="margin-left:auto;font-size:11px;opacity:.9">Kelvin Onomuaborigho</div>
 </div>
 
-<div style="padding:0 15px">
 <div class="tabs">
 <span class="tab active" id="t1" onclick="showTab('foryou')">For You</span>
 <span class="tab" id="t2" onclick="showTab('following')">Following</span>
@@ -36,45 +36,54 @@ body{margin:0;background:#fef9e8;font-family:Arial,sans-serif;color:#222}
 
 <div id="foryou">
 <div class="card">
-<b>Amira • 24 • London</b> <span style="font-size:11px;color:#888">2h ago</span>
-<p style="font-size:13px;margin:8px 0">Slow mornings, deep talks, and genuine connections. Loving this community 💚 Walk in Hyde Park? #NewHere</p>
-<div style="background:#e8e8e8;height:100px;border-radius:10px;display:flex;align-items:center;justify-content:center">📸 Photo</div>
-<div style="margin-top:8px"><b onclick="like(this)" style="cursor:pointer">💚 <span>124</span></b> &nbsp; 💬 18 &nbsp; ↗️ Share 6</div>
+<b>Amira • 24 • London</b> <span style="color:#65676b;font-size:12px"> • 2h ago</span>
+<p style="margin:8px 0">Slow mornings, deep talks, and genuine connections. Loving this community 💙 #NewHere</p>
+<img class="real" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=800" alt="real girl">
+<div style="margin-top:10px;font-size:14px">👍 124  💬 18  ↗️ 6</div>
 </div>
-
 <div class="card">
-<b>Omar • 27 • Manchester</b> <span style="font-size:11px;color:#888">5h ago</span>
-<p style="font-size:13px;margin:8px 0">Grateful for this space. It's refreshing to meet people who value faith, kindness, and real conversation.</p>
-<div><b onclick="like(this)" style="cursor:pointer">🤍 <span>89</span></b> &nbsp; 💬 32 &nbsp; ↗️ Share 4</div>
+<b>Omar • 27 • Manchester</b> <span style="color:#65676b;font-size:12px"> • 5h ago</span>
+<p style="margin:8px 0">Grateful for this space. Real faces, real people.</p>
+<img class="real" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800" alt="real man">
+<div style="margin-top:10px;font-size:14px">👍 89  💬 32  ↗️ 4</div>
+</div>
+<div class="card">
+<b>Sofia • 22 • Birmingham</b> <span style="color:#65676b;font-size:12px"> • 1h ago</span>
+<p style="margin:8px 0">First post on BookFace! Hello everyone 👋</p>
+<img class="real" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800" alt="real person">
+<div style="margin-top:10px;font-size:14px">👍 203  💬 41  ↗️ 9</div>
 </div>
 </div>
 
-<div id="following" style="display:none"><div class="card">Following feed coming soon...</div></div>
-<div id="groups" style="display:none"><div class="card">Groups coming soon...</div></div>
+<div id="following" style="display:none"><div class="card" style="text-align:center;padding:40px">Following feed coming soon... Follow people to see them here!</div></div>
+<div id="groups" style="display:none"><div class="card" style="text-align:center;padding:40px">Groups coming soon... Create your BookFace group!</div></div>
 
-<div class="bottom-nav">
-<span onclick="coming()">🏠 Feed</span>
-<span onclick="coming()">🧭 Explore</span>
-<span onclick="coming()">🤍 Matches</span>
-<span onclick="coming()">💬 Chat³</span>
-<span onclick="coming()">👤 Profile</span>
-</div>
-
-<div class="waitlist-section">
-<h2 style="font-weight:800;font-size:30px">Join Waitlist</h2>
-<form action="https://formsubmit.co/niyyahdating@gmail.com" method="POST">
+<div class="waitlist">
+<h2 style="color:#1877F2;margin-bottom:10px">Join BookFace Waitlist</h2>
+<p style="font-size:13px;color:#555;margin-bottom:12px">Be first to chat when we launch!</p>
+<form action="https://formsubmit.co/bookfacedating@gmail.com" method="POST">
 <input type="hidden" name="_captcha" value="false">
-<input type="hidden" name="_subject" value="New niyyahBook V5 Signup!">
+<input type="hidden" name="_subject" value="New BookFace Member!">
 <input type="hidden" name="_next" value="https://niyyahbook101.github.io/niyyahbook-/thankyou.html">
-<input type="email" name="email" placeholder="Enter email" required style="padding:12px 18px;border-radius:25px;border:1.5px solid #0f5132;width:85%;max-width:320px;margin:10px 0;">
-<br>
-<button class="main" type="submit" style="background:#0f5132;color:#fff;border-radius:25px;padding:12px 28px;border:none;font-weight:700;cursor:pointer;">Join Now - Free 3 Months</button>
+<input type="email" name="email" placeholder="Enter your email" required style="padding:12px 18px;border-radius:25px;border:1.5px solid #1877F2;width:85%;max-width:320px">
+<br><br>
+<button type="submit" style="background:#1877F2;color:#fff;border:none;border-radius:20px;padding:12px 22px;font-weight:800;cursor:pointer">Join Now - Free Access</button>
 </form>
 </div>
 
+<div class="bottom-nav">
+<span onclick="alert('Feed Coming Soon!')">🏠 Feed</span>
+<span onclick="alert('Explore Coming Soon!')">🧭 Explore</span>
+<span onclick="alert('Matches Coming Soon!')">🤍 Matches</span>
+<span onclick="alert('Chat Coming Soon!')">💬 Chat</span>
+<span onclick="alert('Profile Coming Soon!')">👤 Profile</span>
 </div>
 
-<footer style="text-align:center;padding:20px;color:#888;font-size:12px">© 2026 niyyahBook</footer>
+<footer style="text-align:center;padding:20px;color:#888;font-size:11px">
+© 2026 BookFace • BF • BOOKFACE<br>
+Brand Owner: Kelvin Onomuaborigho<br>
+bookfacedating@gmail.com
+</footer>
 
 <script>
 function showTab(n){
@@ -87,8 +96,6 @@ if(n=='foryou')document.getElementById('t1').classList.add('active');
 if(n=='following')document.getElementById('t2').classList.add('active');
 if(n=='groups')document.getElementById('t3').classList.add('active');
 }
-function like(e){let s=e.querySelector('span');s.innerText=parseInt(s.innerText)+1;e.style.color='#0f5132'}
-function coming(){alert('Coming Soon InshaAllah! 🚀')}
 </script>
 </body>
 </html>
