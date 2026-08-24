@@ -1,34 +1,46 @@
 # 🔵 BookFace
+### BF • BOOKFACE — Real Faces, Real Connections
 
-**BF • BOOKFACE**
+![BookFace Logo](logo.png)
 
-Real Faces, Real Books, Real Connections.
+> **Brand Owner:** Kelvin Onomuaborigho
+> **Email:** bookfacedating@gmail.com
+> **Live:** https://niyyahbook101.github.io/bookface/
 
-> Brand Owner: **Kelvin Onomuaborigho**
-> Official Email: **bookfacedating@gmail.com**
-> Color: Facebook Blue #1877F2 🔵
+## Brand Identity
 
-### About
-BookFace is a social connection app — like Facebook but for real, intentional connections. No fake profiles, no grey boxes — just real people.
+**Logo Concept:**
+- Monogram: **BF** — Bold White, Extra-Bold Sans
+- Wordmark: **BOOKFACE** below BF
+- Meaning: Trust, Clean, Facebook-level professional
 
-### Features
-- 🔵 Facebook-style clean blue design
-- 🖼️ Real people, real pictures
-- 💬 Chat (coming soon)
+**Colors:**
+- Primary Blue: `#1877F2` (Facebook Blue)
+- White: `#FFFFFF`
+- Feed Background: `#E7F3FF`
+- Shape: Rounded square, 22% radius, 1:1 ratio
+
+**Typography:**
+- Font: Arial Black / Inter ExtraBold
+- BF Weight: 900, BOOKFACE Weight: 700
+- All caps, clean, app-icon readable
+
+## About
+BookFace is a social connection platform — real people, real photos, no grey boxes. Like Facebook but for intentional, real connections.
+
+## Features
+- 🔵 Blue professional design
+- 🖼️ Real feeds (For You / Following / Groups)
 - 🤍 Matches (coming soon)
-- 🧭 Explore feed
+- 💬 Chat (coming soon)
 - 👥 Groups
 
-### Logo
-BF monogram on top, BOOKFACE text below — Blue #1877F2 background, white text. Tough & clean.
+## Tech
+- HTML/CSS/JS
+- GitHub Pages hosting
+- Waitlist connected to bookfacedating@gmail.com
 
-### Live Site
-https://niyyahbook101.github.io/niyyahbook-/
+## Owner
+© 2026 BookFace — Built by Kelvin Onomuaborigho
 
-### Waitlist
-Join at bookfacedating@gmail.com
-
-### Owner
-Kelvin Onomuaborigho - 2026
-
-© 2026 BookFace. All rights reserved.
+**BF — Tough, Clean, Social.**
